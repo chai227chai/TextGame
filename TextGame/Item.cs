@@ -36,6 +36,16 @@ namespace TextGame
             this.spec = spec;
         }
 
+        public Item(Item item)
+        {
+            this.number = item.number;
+            this.itemType = item.itemType;
+            this.name = item.name;
+            this.detail = item.detail;
+            this.price = item.price;
+            this.spec = item.spec;
+        }
+
         public string Number
         {
             get{ return this.number; }

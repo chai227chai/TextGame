@@ -25,7 +25,8 @@ namespace TextGame
 
         public void addInventroy(Item item)
         {
-            inventoryList.Add(item);
+            Item Inventory_item = new Item(item);
+            inventoryList.Add(Inventory_item);
         }
 
         public void AddEquipedTem(ItemType type, Item item)
