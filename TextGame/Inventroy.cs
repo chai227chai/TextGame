@@ -31,7 +31,7 @@ namespace TextGame
 
         public void AddEquipedTem(ItemType type, Item item)
         {
-            if (equipedTem.ContainsKey(type) && equipedTem[type].Number != item.Number)
+            if (equipedTem.ContainsKey(type) && equipedTem[type] != item)
             {
                 equipedTem[type].SetEquip();
                 equipedTem.Remove(type);
@@ -39,7 +39,7 @@ namespace TextGame
                 equipedTem.Add(type, item);
                 item.SetEquip();
             }
-            else if(equipedTem.ContainsKey(type) && equipedTem[type].Number == item.Number)
+            else if(equipedTem.ContainsKey(type) && equipedTem[type] == item)
             {
                 item.SetEquip();
                 equipedTem.Remove(type);
