@@ -14,8 +14,8 @@ namespace TextGame
 
         private int level = 1;
         private int health = 100;
-        private int defend = 10;
-        private int attack = 17;
+        private int defend;
+        private int attack;
         private int gold = 1500;
         private int temAttack;
         private int temDefend;
@@ -51,12 +51,18 @@ namespace TextGame
 
         public int Defend
         {
-            get { return defend + (level - 1); }
+            get {
+                defend = 10 + (level - 1);
+                return defend; 
+            }
         }
 
         public int Attack
         {
-            get { return attack + (int)((float)(level - 1) * 0.5); }
+            get {
+                attack = 17 + (int)((float)(level - 1) * 0.5);
+                return attack; 
+            }
         }
 
         public int Gold
