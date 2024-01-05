@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Collections.Specialized.BitVector32;
@@ -34,6 +35,8 @@ namespace TextGame
             Console.WriteLine("3. 상점");
             Console.WriteLine("4. 던전입장");
             Console.WriteLine("5. 휴식하기");
+            Console.WriteLine("6. 게임 세이브");
+            Console.WriteLine("7. 게임 로드");
 
             Console.WriteLine();
 
@@ -41,7 +44,7 @@ namespace TextGame
             Console.Write(">>");
             string act = Console.ReadLine();
 
-            while(int.Parse(act) > 5 || int.Parse(act) <= 0)
+            while(int.Parse(act) > 7 || int.Parse(act) <= 0)
             {
                 Console.WriteLine("다시 입력해 주세요.");
                 Console.Write(">>");
@@ -72,6 +75,18 @@ namespace TextGame
             {
                 Console.Clear();
                 Rest();
+            }
+            else if (act == "6")
+            {
+                Console.Clear();
+                saveGame();
+                MainTown();
+            }
+            else if (act == "7")
+            {
+                Console.Clear();
+                loadGame();
+                MainTown();
             }
         }
 
@@ -523,7 +538,35 @@ namespace TextGame
         }
 
         //---------------------------------------------------------------------------------------------------------------
-        
+        void saveGame()
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fs = new FileStream("C:\\Users\\82102\\Desktop\\game practice\\spartaUnity\\TextGame\\savefile.save", FileMode.Create);
+            SerializableDaraField dataSave = new SerializableDaraField();
+
+            dataSave.character = this.character;
+            dataSave.itemList = this.itemList;
+            dataSave.Inventroy = this.inventory;
+
+            bf.Serialize(fs, dataSave);
+            fs.Close();
+
+        }
+
+        void loadGame()
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream fs = new FileStream("C:\\Users\\82102\\Desktop\\game practice\\spartaUnity\\TextGame\\savefile.save", FileMode.Open);
+            SerializableDaraField dataSave = new SerializableDaraField();
+
+            dataSave = bf.Deserialize(fs) as SerializableDaraField;
+            fs.Close();
+
+            this.character = dataSave.character;
+            this.itemList = dataSave.itemList;
+            this.inventory = dataSave.Inventroy;
+
+        }
         
     }
 

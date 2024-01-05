@@ -10,6 +10,8 @@ namespace TextGame
     {
         ATTACK, DEFEND
     }
+
+    [Serializable()]
     public class ItemSpec
     {
         private SpecType specType;

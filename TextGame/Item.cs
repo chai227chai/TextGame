@@ -8,9 +8,10 @@ namespace TextGame
 {
     public enum ItemType
     {
-        WEAPON, ARMOR
+        WEAPON, ARMOR, HAT
     }
 
+    [Serializable()]
     internal class Item
     {
         private string name;
@@ -101,6 +102,8 @@ namespace TextGame
                         return "갑옷";
                     case ItemType.WEAPON:
                         return "무기";
+                    case ItemType.HAT:
+                        return "투구";
                 }
 
                 return "";

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace TextGame
 {
+    [Serializable]
     internal class Inventroy : IEnumerable
     {
         private List<Item> inventoryList;

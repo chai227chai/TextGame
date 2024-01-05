@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace TextGame
 {
+    [Serializable]
     internal class Character
     {
         private string name = "전사";
