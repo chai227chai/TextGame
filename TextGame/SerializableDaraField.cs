@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TextGame
 {
     [Serializable]
-    internal class SerializableDaraField
+    internal class SerializableDataField
     {
         public Character character;
         public ItemList itemList;

@@ -35,6 +35,8 @@ namespace TextGame
             Console.WriteLine("3. 상점");
             Console.WriteLine("4. 던전입장");
             Console.WriteLine("5. 휴식하기");
+            Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("6. 게임 세이브");
             Console.WriteLine("7. 게임 로드");
 
@@ -542,7 +544,7 @@ namespace TextGame
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream fs = new FileStream("C:\\Users\\82102\\Desktop\\game practice\\spartaUnity\\TextGame\\savefile.save", FileMode.Create);
-            SerializableDaraField dataSave = new SerializableDaraField();
+            SerializableDataField dataSave = new SerializableDataField();
 
             dataSave.character = this.character;
             dataSave.itemList = this.itemList;
@@ -557,9 +559,9 @@ namespace TextGame
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream fs = new FileStream("C:\\Users\\82102\\Desktop\\game practice\\spartaUnity\\TextGame\\savefile.save", FileMode.Open);
-            SerializableDaraField dataSave = new SerializableDaraField();
+            SerializableDataField dataSave = new SerializableDataField();
 
-            dataSave = bf.Deserialize(fs) as SerializableDaraField;
+            dataSave = bf.Deserialize(fs) as SerializableDataField;
             fs.Close();
 
             this.character = dataSave.character;
