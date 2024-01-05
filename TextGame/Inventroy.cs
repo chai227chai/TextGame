@@ -14,9 +14,6 @@ namespace TextGame
 
         private Dictionary<ItemType, Item> equipedTem;
 
-        private int temAttack;
-        private int temDefend;
-
         public Inventroy()
         {
             this.inventoryList = new List<Item>();
