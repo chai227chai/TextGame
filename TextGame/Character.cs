@@ -95,9 +95,16 @@ namespace TextGame
 
         public string TemAttack
         {
-            get { if(temAttack > 0)
+            get 
+            { 
+                if(temAttack > 0)
                 {
-                    string exattack = $"(+{temAttack.ToString()})";
+                    string exattack = $"(+{temAttack})";
+                    return exattack;
+                }
+                else if (temAttack < 0)
+                {
+                    string exattack = $"({temAttack})";
                     return exattack;
                 }
                 else
@@ -118,7 +125,12 @@ namespace TextGame
             {
                 if (temDefend > 0)
                 {
-                    string exdefend = $"(+{temDefend.ToString()})";
+                    string exdefend = $"(+{temDefend})";
+                    return exdefend;
+                }
+                else if (temDefend > 0)
+                {
+                    string exdefend = $"({temDefend})";
                     return exdefend;
                 }
                 else
