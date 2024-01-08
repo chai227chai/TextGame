@@ -19,6 +19,7 @@ namespace TextGame
         private string number;
 
         private int price;
+        private int left;
 
         private ItemSpec spec;
         private ItemType itemType;
@@ -29,7 +30,7 @@ namespace TextGame
         private int inchant = 0;
         private int maxInchant = 3;
 
-        public Item(string number, ItemType itemType, string name, string detail, int price, ItemSpec spec)
+        public Item(string number, ItemType itemType, string name, string detail, int price, ItemSpec spec, int left)
         {
             this.number = number;
             this.itemType = itemType;
@@ -37,6 +38,7 @@ namespace TextGame
             this.detail = detail;
             this.price = price;
             this.spec = spec;
+            this.left = left;
         }
 
         public Item(Item item)
@@ -69,12 +71,18 @@ namespace TextGame
             get { return this.price; }
         }
 
+        public int Left
+        {
+            get { return this.left; }
+            set { this.left = value; }
+        }
+
         public string SalePrice
         {
             get {
                 if (isSale)
                 {
-                    string _saleprice = price.ToString() + " G";
+                    string _saleprice = price.ToString() + " G (남은 재고 " + left + "개)";
                     return _saleprice;
                 }
                 else
@@ -84,18 +92,24 @@ namespace TextGame
             }
         }
 
-        public void SetSale()
+        public void ItemSold()
         {
-            if (this.isSale)
+            if (left > 0)
+            {
+                left--;
+            }
+            if(left == 0)
             {
                 this.isSale = false;
             }
-            else
-            {
-                this.isSale = true;
-            }
-            
         }
+
+        public void ItemRefund()
+        {
+            left++;
+            this.isSale = true;
+        }
+
         public bool GetSale()
         {
             return isSale;

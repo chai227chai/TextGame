@@ -201,7 +201,7 @@ namespace TextGame
                 {
                     if (character.Gold >= itemList.GetItem(cursor).Price && itemList.GetItem(cursor).GetSale())
                     {
-                        itemList.GetItem(cursor).SetSale();
+                        itemList.GetItem(cursor).ItemSold();
                         inventory.addInventroy(itemList.GetItem(cursor));
                         character.TemPurchase(itemList.GetItem(cursor).Price);
 
@@ -264,7 +264,7 @@ namespace TextGame
                 }
                 else if (cursor < index && cursor > 0)
                 {
-                    itemList.GetItemList().Find(itemnumber => itemnumber.Number == inventory.GetItem(cursor).Number).SetSale();
+                    itemList.GetItemList().Find(itemnumber => itemnumber.Number == inventory.GetItem(cursor).Number).ItemRefund();
                     character.TemSale(inventory.GetItem(cursor).Price);
                     inventory.RemoveItem(cursor);
 
