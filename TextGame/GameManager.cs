@@ -34,16 +34,17 @@ namespace TextGame
             Console.WriteLine("1. 상태보기");
             Console.WriteLine("2. 인벤토리");
             Console.WriteLine("3. 상점");
-            Console.WriteLine("4. 던전입장");
-            Console.WriteLine("5. 휴식하기");
+            Console.WriteLine("4. 대장간");
+            Console.WriteLine("5. 던전입장");
+            Console.WriteLine("6. 휴식하기");
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("6. 게임 세이브");
-            Console.WriteLine("7. 게임 로드");
+            Console.WriteLine("7. 게임 세이브");
+            Console.WriteLine("8. 게임 로드");
 
             Console.WriteLine();
 
-            int act = IsValidInput(7, 1);
+            int act = IsValidInput(8, 1);
 
             switch (act)
             {
@@ -57,16 +58,19 @@ namespace TextGame
                     Shop();
                     break;
                 case 4:
-                    DungeonEnter();
+                    Blacksmith();
                     break;
                 case 5:
-                    Rest();
+                    DungeonEnter();
                     break;
                 case 6:
+                    Rest();
+                    break;
+                case 7:
                     saveGame();
                     MainTown();
                     break;
-                case 7:
+                case 8:
                     loadGame();
                     MainTown();
                     break;
@@ -239,7 +243,7 @@ namespace TextGame
             int index = 1;
             foreach (Item item in inventory)
             {
-                Console.WriteLine($"- {index} {item.NowEquip}{item.Name} | {item.GetTypeName} | {item.GetSpecName} | {item.Detail} | {item.Price * 85 / 100} G");
+                Console.WriteLine($"- {index} {item.NowEquip}{item.NowInchant}{item.Name} | {item.GetTypeName} | {item.GetSpecName} | {item.Detail} | {item.Price * 85 / 100} G");
                 index++;
             }
 
@@ -287,7 +291,7 @@ namespace TextGame
 
             foreach (Item item in inventory)
             {
-                Console.WriteLine($"- {item.NowEquip}{item.Name} | {item.GetTypeName} | {item.GetSpecName} | {item.Detail}");
+                Console.WriteLine($"- {item.NowEquip}{item.NowInchant}{item.Name} | {item.GetTypeName} | {item.GetSpecName} | {item.Detail}");
             }
 
             Console.WriteLine();
@@ -325,7 +329,7 @@ namespace TextGame
             int index = 1;
             foreach (Item item in inventory)
             {
-                Console.WriteLine($"- {index} {item.NowEquip}{item.Name} | {item.GetTypeName} | {item.GetSpecName} | {item.Detail}");
+                Console.WriteLine($"- {index} {item.NowEquip}{item.NowInchant}{item.Name} | {item.GetTypeName} | {item.GetSpecName} | {item.Detail}");
                 index++;
             }
 
@@ -334,10 +338,6 @@ namespace TextGame
             Console.WriteLine("0. 나가기");
 
             Console.WriteLine();
-
-            //Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            //Console.Write(">>");
-            //string act = Console.ReadLine();
 
             bool loop = true;
             while (loop)
@@ -350,7 +350,6 @@ namespace TextGame
                 }
                 else if (cursor < index && cursor > 0)
                 {
-                    //inventory.GetItem(cursor).SetEquip();
                     inventory.AddEquipedTem(inventory.GetItem(cursor).Type, inventory.GetItem(cursor));
 
                     loop = false;
@@ -365,12 +364,78 @@ namespace TextGame
         }
 
         //---------------------------------------------------------------------------------------------------------------
+        void Blacksmith()
+        {
+            Console.Clear();
+            Console.WriteLine("대장간");
+            Console.WriteLine("보유 중인 아이템을 강화 할 수 있습니다.");
+
+            Console.WriteLine();
+
+            Console.WriteLine("[보유 골드]");
+            Console.WriteLine(character.GoldStr);
+
+            Console.WriteLine();
+
+            Console.WriteLine("[아이템 목록]");
+
+            int index = 1;
+            foreach (Item item in inventory)
+            {
+                Console.WriteLine($"- {index} {item.NowEquip}{item.NowInchant}{item.Name} | {item.GetTypeName} | {item.GetSpecName} | {item.Detail} | {item.Price * 30 / 100} G");
+                index++;
+            }
+
+            Console.WriteLine();
+
+            Console.WriteLine("0. 나가기");
+
+            Console.WriteLine();
+
+            bool loop = true;
+            while (loop)
+            {
+                int cursor = IsValidInput(index - 1, 0);
+
+                if (cursor == 0)
+                {
+                    break;
+                }
+                else if (cursor < index && cursor > 0)
+                {
+                    if (character.Gold >= (inventory.GetItem(cursor).Price * 30 / 100) && inventory.GetItem(cursor).Inchant < inventory.GetItem(cursor).MaxInchant)
+                    {
+                        inventory.GetItem(cursor).InchantTem();
+                        character.TemPurchase(inventory.GetItem(cursor).Price * 30 / 100);
+                        loop = false;
+
+                        Blacksmith();
+                    }
+                    else if (inventory.GetItem(cursor).Inchant >= inventory.GetItem(cursor).MaxInchant)
+                    {
+                        Console.WriteLine("최고 강화 단계에 도달했습니다.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("골드가 부족합니다.");
+                    }
+
+                }
+            }
+
+            MainTown();
+        }
+
+        //---------------------------------------------------------------------------------------------------------------
 
         void DungeonEnter()
         {
             Console.Clear();
             Console.WriteLine("던전입장");
             Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
+
+            character.SetTemAttack(inventory.ExAttack());
+            character.SetTemDefend(inventory.ExDefend());
 
             Console.WriteLine();
             Console.WriteLine("[상태]");

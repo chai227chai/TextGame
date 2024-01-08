@@ -144,7 +144,7 @@ namespace TextGame
         {
             get 
             {
-                this.realAttack = attack + temAttack;
+                this.realAttack = Attack + temAttack;
                 return realAttack; 
             }
         }
@@ -153,7 +153,7 @@ namespace TextGame
         {
             get
             {
-                this.realDefend = defend + temDefend;
+                this.realDefend = Defend + temDefend;
                 return realDefend;
             }
         }

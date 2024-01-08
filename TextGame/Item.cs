@@ -26,6 +26,9 @@ namespace TextGame
         private bool isSale = true;
         private bool isEquiped = false;
 
+        private int inchant = 0;
+        private int maxInchant = 3;
+
         public Item(string number, ItemType itemType, string name, string detail, int price, ItemSpec spec)
         {
             this.number = number;
@@ -127,12 +130,59 @@ namespace TextGame
 
         public int GetSpec
         {
-            get { return spec.getSpec(); }
+            get 
+            {
+                int realSpec = spec.getSpec() + (2 * inchant);
+                return realSpec; 
+            }
+        }
+
+        public void InchantTem()
+        {
+            if (this.inchant < 3)
+            {
+                this.inchant++;
+            }
+        }
+
+        public int MaxInchant
+        {
+            get { return this.maxInchant; }
+        }
+
+        public int Inchant
+        {
+            get { return inchant; }
+        }
+
+        public string NowInchant
+        {
+            get
+            {
+                if (inchant > 0)
+                {
+                    return "(+" + inchant + ")";
+                }
+                else
+                {
+                    return "";
+                }
+            }
         }
 
         public string GetSpecName
         {
-            get { return spec.getSpecName(); }
+            get 
+            { 
+                if(inchant > 0)
+                {
+                    return spec.getSpecName() + "(+" + (2 * inchant) + ")";
+                }
+                else
+                {
+                    return spec.getSpecName();
+                }
+            }
         }
 
         public bool IsEquip
