@@ -25,6 +25,7 @@ namespace TextGame
         //---------------------------------------------------------------------------------------------------------------
         void MainTown()
         {
+            Console.Clear();
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
             Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
 
@@ -42,59 +43,41 @@ namespace TextGame
 
             Console.WriteLine();
 
-            Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            Console.Write(">>");
-            string act = Console.ReadLine();
+            int act = IsValidInput(7, 1);
 
-            while(int.Parse(act) > 7 || int.Parse(act) <= 0)
+            switch (act)
             {
-                Console.WriteLine("다시 입력해 주세요.");
-                Console.Write(">>");
-                act = Console.ReadLine();
+                case 1:
+                    CharacterStat();
+                    break;
+                case 2:
+                    InventoryBag();
+                    break;
+                case 3:
+                    Shop();
+                    break;
+                case 4:
+                    DungeonEnter();
+                    break;
+                case 5:
+                    Rest();
+                    break;
+                case 6:
+                    saveGame();
+                    MainTown();
+                    break;
+                case 7:
+                    loadGame();
+                    MainTown();
+                    break;
             }
 
-            if(act == "1")
-            {
-                Console.Clear();
-                CharacterStat();
-            }
-            else if(act == "2")
-            {
-                Console.Clear();
-                InventoryBag();
-            }
-            else if(act == "3")
-            {
-                Console.Clear();
-                Shop();
-            }
-            else if (act == "4")
-            {
-                Console.Clear();
-                DungeonEnter();
-            }
-            else if (act == "5")
-            {
-                Console.Clear();
-                Rest();
-            }
-            else if (act == "6")
-            {
-                Console.Clear();
-                saveGame();
-                MainTown();
-            }
-            else if (act == "7")
-            {
-                Console.Clear();
-                loadGame();
-                MainTown();
-            }
         }
 
         //---------------------------------------------------------------------------------------------------------------
         void CharacterStat()
         {
+            Console.Clear();
             Console.WriteLine("상태 보기");
             Console.WriteLine("캐릭터의 정보가 표시됩니다.");
 
@@ -114,27 +97,23 @@ namespace TextGame
 
             Console.WriteLine("0. 나가기");
 
-            Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            Console.Write(">>");
-            string act = Console.ReadLine();
+            Console.WriteLine();
 
-            while (act != "0")
+            int act = IsValidInput(0, 0);
+
+            switch (act)
             {
-                Console.WriteLine("다시 입력해 주세요.");
-                Console.Write(">>");
-                act = Console.ReadLine();
+                case 0:
+                    MainTown();
+                    break;;
             }
 
-            if (act == "0")
-            {
-                Console.Clear();
-                MainTown();
-            }
         }
 
         //---------------------------------------------------------------------------------------------------------------
         void Shop()
         {
+            Console.Clear();
             Console.WriteLine("상점");
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
 
@@ -157,31 +136,21 @@ namespace TextGame
             Console.WriteLine("2. 아이템 판매");
             Console.WriteLine("0. 나가기");
 
-            Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            Console.Write(">>");
-            string act = Console.ReadLine();
+            Console.WriteLine();
 
-            while (act != "1" && act != "2" && act != "0")
-            {
-                Console.WriteLine("다시 입력해 주세요.");
-                Console.Write(">>");
-                act = Console.ReadLine();
-            }
+            int act = IsValidInput(2, 0);
 
-            if(act == "1")
+            switch (act)
             {
-                Console.Clear();
-                PurchaceTem();
-            }
-            else if (act == "2")
-            {
-                Console.Clear();
-                SaleTem();
-            }
-            else if (act == "0")
-            {
-                Console.Clear();
-                MainTown();
+                case 1:
+                    PurchaceTem();
+                    break;
+                case 2:
+                    SaleTem();
+                    break;
+                case 0:
+                    MainTown();
+                    break;
             }
 
         }
@@ -189,6 +158,7 @@ namespace TextGame
         //---------------------------------------------------------------------------------------------------------------
         void PurchaceTem()
         {
+            Console.Clear();
             Console.WriteLine("상점 - 아이템 구매");
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
 
@@ -212,15 +182,14 @@ namespace TextGame
 
             Console.WriteLine("0. 나가기");
 
-            Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            Console.Write(">>");
-            string act = Console.ReadLine();
+            Console.WriteLine();
 
             bool loop = true;
             while (loop)
             {
-                int cursor = int.Parse(act);
-                if (act == "0")
+                int cursor = IsValidInput(index - 1, 0);
+
+                if (cursor == 0)
                 {
                     break;
                 }
@@ -234,7 +203,6 @@ namespace TextGame
 
                         loop = false;
 
-                        Console.Clear();
                         PurchaceTem();
                     }
                     else if (!itemList.GetItem(cursor).GetSale())
@@ -246,22 +214,16 @@ namespace TextGame
                         Console.WriteLine("골드가 부족합니다.");
                     }
                 }
-                Console.WriteLine("다시 입력해 주세요.");
-                Console.Write(">>");
-                act = Console.ReadLine();
             }
 
-            if (act == "0")
-            {
-                Console.Clear();
-                Shop();
-            }
+            Shop();
 
         }
 
         //---------------------------------------------------------------------------------------------------------------
         void SaleTem()
         {
+            Console.Clear();
             Console.WriteLine("상점 - 아이템 판매");
             Console.WriteLine("필요한 아이템을 얻을 수 있는 상점입니다.");
 
@@ -285,15 +247,14 @@ namespace TextGame
 
             Console.WriteLine("0. 나가기");
 
-            Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            Console.Write(">>");
-            string act = Console.ReadLine();
+            Console.WriteLine();
 
             bool loop = true;
             while (loop)
             {
-                int cursor = int.Parse(act);
-                if (act == "0")
+                int cursor = IsValidInput(index - 1, 0);
+
+                if (cursor == 0)
                 {
                     break;
                 }
@@ -305,25 +266,18 @@ namespace TextGame
 
                     loop = false;
 
-                    Console.Clear();
                     SaleTem();
                 }
-                Console.WriteLine("다시 입력해 주세요.");
-                Console.Write(">>");
-                act = Console.ReadLine();
             }
 
-            if (act == "0")
-            {
-                Console.Clear();
-                Shop();
-            }
+            Shop();
 
         }
 
         //---------------------------------------------------------------------------------------------------------------
         void InventoryBag()
         {
+            Console.Clear();
             Console.WriteLine("인벤토리");
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
 
@@ -341,32 +295,26 @@ namespace TextGame
             Console.WriteLine("1. 장착 관리");
             Console.WriteLine("0. 나가기");
 
-            Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            Console.Write(">>");
-            string act = Console.ReadLine();
+            Console.WriteLine();
 
-            while (act != "1" && act != "0")
+            int act = IsValidInput(1, 0);
+
+            switch (act)
             {
-                Console.WriteLine("다시 입력해 주세요.");
-                Console.Write(">>");
-                act = Console.ReadLine();
+                case 1:
+                    CharacterEquip();
+                    break;
+                case 0:
+                    MainTown();
+                    break; ;
             }
 
-            if (act == "1")
-            {
-                Console.Clear();
-                CharacterEquip();
-            }
-            else if (act == "0")
-            {
-                Console.Clear();
-                MainTown();
-            }
         }
 
         //---------------------------------------------------------------------------------------------------------------
         void CharacterEquip()
         {
+            Console.Clear();
             Console.WriteLine("인벤토리 - 장착관리");
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.");
 
@@ -385,15 +333,18 @@ namespace TextGame
 
             Console.WriteLine("0. 나가기");
 
-            Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            Console.Write(">>");
-            string act = Console.ReadLine();
+            Console.WriteLine();
+
+            //Console.WriteLine("원하시는 행동을 입력해 주세요.");
+            //Console.Write(">>");
+            //string act = Console.ReadLine();
 
             bool loop = true;
             while (loop)
             {
-                int cursor = int.Parse(act);
-                if (act == "0")
+                int cursor = IsValidInput(index - 1, 0);
+
+                if (cursor == 0)
                 {
                     break;
                 }
@@ -407,22 +358,17 @@ namespace TextGame
                     Console.Clear();
                     CharacterEquip();
                 }
-                Console.WriteLine("다시 입력해 주세요.");
-                Console.Write(">>");
-                act = Console.ReadLine();
             }
 
-            if (act == "0")
-            {
-                Console.Clear();
-                InventoryBag();
-            }
+            Console.Clear();
+            InventoryBag();
         }
 
         //---------------------------------------------------------------------------------------------------------------
 
         void DungeonEnter()
         {
+            Console.Clear();
             Console.WriteLine("던전입장");
             Console.WriteLine("이곳에서 던전으로 들어가기전 활동을 할 수 있습니다.");
 
@@ -438,22 +384,16 @@ namespace TextGame
             Console.WriteLine($"1. {dungeon.Difficulty(1)} | 방어력 {dungeon.RecoDef(1)} 이상 권장");
             Console.WriteLine($"2. {dungeon.Difficulty(2)} | 방어력 {dungeon.RecoDef(2)} 이상 권장");
             Console.WriteLine($"3. {dungeon.Difficulty(3)} | 방어력 {dungeon.RecoDef(3)} 이상 권장");
+
+            Console.WriteLine();
+
             Console.WriteLine("0. 나가기");
 
             Console.WriteLine();
 
-            Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            Console.Write(">>");
-            string act = Console.ReadLine();
+            int act = IsValidInput(3, 0);
 
-            while (int.Parse(act) > 4 || int.Parse(act) < 0)
-            {
-                Console.WriteLine("다시 입력해 주세요.");
-                Console.Write(">>");
-                act = Console.ReadLine();
-            }
-
-            if (act == "0")
+            if (act == 0)
             {
                 Console.Clear();
                 MainTown();
@@ -461,7 +401,7 @@ namespace TextGame
             else
             {
                 Console.Clear();
-                DungeonPlay(int.Parse(act));
+                DungeonPlay(act);
             }
         }
 
@@ -472,27 +412,23 @@ namespace TextGame
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
 
-            Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            Console.Write(">>");
-            string act = Console.ReadLine();
+            Console.WriteLine();
 
-            while (act != "0")
-            {
-                Console.WriteLine("다시 입력해 주세요.");
-                Console.Write(">>");
-                act = Console.ReadLine();
-            }
+            int act = IsValidInput(0, 0);
 
-            if (act == "0")
+            switch (act)
             {
-                Console.Clear();
-                DungeonEnter();
+                case 0:
+
+                    DungeonEnter();
+                    break;
             }
         }
 
         //---------------------------------------------------------------------------------------------------------------
         void Rest()
         {
+            Console.Clear();
             Console.WriteLine("휴식하기");
             Console.WriteLine($"500 G 를 내면 체력을 회복할 수 있습니다. (보유 골드 : {character.GoldStr})");
 
@@ -501,19 +437,18 @@ namespace TextGame
             Console.WriteLine("1. 휴식하기");
             Console.WriteLine("0. 나가기");
 
-            Console.WriteLine("원하시는 행동을 입력해 주세요.");
-            Console.Write(">>");
-            string act = Console.ReadLine();
+            Console.WriteLine();
 
             bool loop = true;
             while (loop)
             {
-                int cursor = int.Parse(act);
-                if (act == "0")
+                int act = IsValidInput(1, 0);
+
+                if (act == 0)
                 {
                     break;
                 }
-                else if (act == "1")
+                else if (act == 1)
                 {
                     if(character.Gold < 500)
                     {
@@ -525,19 +460,50 @@ namespace TextGame
                         character.Health = 100;
                         Console.Clear();
                         Rest();
+                        loop = false;
                     }
                 }
-                Console.WriteLine("원하시는 행동을 입력해 주세요.");
-                Console.Write(">>");
-                act = Console.ReadLine();
             }
 
-            if (act == "0")
-            {
-                Console.Clear();
-                MainTown();
-            }
+            MainTown();
         }
+
+        //---------------------------------------------------------------------------------------------------------------
+        public int IsValidInput(int max, int min)
+        {
+            int keyInput;
+            bool result;
+            int cnt = 0;
+
+            do
+            {
+                if(cnt == 0)
+                {
+                    Console.WriteLine("원하시는 행동을 입력해 주세요.");
+                }
+                else
+                {
+                    Console.WriteLine("다시 입력해 주세요.");
+                }
+                Console.Write(">>");
+                result = int.TryParse(Console.ReadLine(), out keyInput) ;
+
+                cnt = 1;
+            } while (result == false || IsValidInput(keyInput, min, max) == false);
+
+            return keyInput;
+        }
+
+        private bool IsValidInput(int keyInput, int min, int max)
+        {
+            if(min <= keyInput && keyInput <= max)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
 
         //---------------------------------------------------------------------------------------------------------------
         void saveGame()
