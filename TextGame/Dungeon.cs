@@ -13,7 +13,6 @@ namespace TextGame
     internal class Dungeon
     {
         private Random random = new Random();
-        private int difficulty;
 
         private int[] defend = new int[] {0, 5, 11, 17};
 
