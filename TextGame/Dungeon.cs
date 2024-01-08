@@ -44,6 +44,7 @@ namespace TextGame
 
             character.Health -= character.Health / 2;
 
+            Console.Clear();
             Console.WriteLine("던전 실패");
             Console.WriteLine($"권장 방어력이 맞지 않아 {Difficulty(difficulty)}탐험을 실패하였습니다.");
             Console.WriteLine("보상을 획득하실 수 없습니다.");
@@ -61,6 +62,7 @@ namespace TextGame
             int damage = random.Next(20 - (character.RealDefend - defend[difficulty]), 36 - (character.RealDefend - defend[difficulty]));
             character.Health -= damage;
 
+            Console.Clear();
             if (character.Health <= 0)
             {
                 Console.WriteLine("던전 실패");

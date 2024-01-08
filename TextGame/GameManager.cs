@@ -354,12 +354,10 @@ namespace TextGame
 
                     loop = false;
 
-                    Console.Clear();
                     CharacterEquip();
                 }
             }
 
-            Console.Clear();
             InventoryBag();
         }
 
@@ -460,12 +458,10 @@ namespace TextGame
 
             if (act == 0)
             {
-                Console.Clear();
                 MainTown();
             }
             else
             {
-                Console.Clear();
                 DungeonPlay(act);
             }
         }
@@ -484,7 +480,6 @@ namespace TextGame
             switch (act)
             {
                 case 0:
-
                     DungeonEnter();
                     break;
             }
@@ -523,7 +518,7 @@ namespace TextGame
                     {
                         character.Gold -= 500;
                         character.Health = 100;
-                        Console.Clear();
+
                         Rest();
                         loop = false;
                     }
