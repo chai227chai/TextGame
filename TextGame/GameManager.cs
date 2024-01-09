@@ -202,7 +202,7 @@ namespace TextGame
             Console.WriteLine("[아이템 목록]");
 
             int index = 1;
-            foreach (Item item in itemList)
+            foreach (Item item in itemList.GetItemList)
             {
                 Console.WriteLine($"- {index} {item.Name} | {item.GetTypeName} | {item.GetSpecName} | {item.Detail} | {item.SalePrice}");
                 index++;

@@ -48,9 +48,12 @@ namespace TextGame
             return this.itemList[n-1];
         }
 
-        public List<Item> GetItemList()
+        public List<Item> GetItemList
         {
-            return itemList;
+            get
+            {
+                return itemList;
+            }
         }
     }
 
